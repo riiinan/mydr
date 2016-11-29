@@ -46,13 +46,13 @@ public class MyDr_login {
 		frame.getContentPane().setLayout(null);
 		
 		userNameField = new JTextField();
-		userNameField.setText("User Name");
+		userNameField.setText("Käyttäjätunnus");
 		userNameField.setBounds(262, 209, 200, 20);
 		frame.getContentPane().add(userNameField);
 		userNameField.setColumns(10);
 		
 		passwordField = new JTextField();
-		passwordField.setText("Password");
+		passwordField.setText("Salasana");
 		passwordField.setBounds(262, 271, 200, 20);
 		frame.getContentPane().add(passwordField);
 		passwordField.setColumns(10);

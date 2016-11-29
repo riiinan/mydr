@@ -14,7 +14,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Panel;
 
-public class MyDr_start_view {
+public class MyDr_patient_view {
 
 	private JFrame frame;
 
@@ -25,7 +25,7 @@ public class MyDr_start_view {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MyDr_start_view window = new MyDr_start_view();
+					MyDr_patient_view window = new MyDr_patient_view();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class MyDr_start_view {
 	/**
 	 * Create the application.
 	 */
-	public MyDr_start_view() {
+	public MyDr_patient_view() {
 		initialize();
 	}
 
