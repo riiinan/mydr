@@ -1,22 +1,31 @@
 package layouts;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Button;
-import java.awt.FlowLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Panel;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JTextField;
 
 public class MyDr_add_visit_note {
 
 	private JFrame frame;
+	private JTextField doctorNameField;
+	private JTextField locationField;
+	private JTextField dateField;
+	private JTextField diagnosisField;
+	private JTextField clicinalNoteField;
+	private JLabel lblNewLabel;
+	private JLabel lblSijainti;
+	private JLabel lblPivmr;
+	private JLabel lblOletettuDiagnoosi;
 
 	/**
 	 * Launch the application.
@@ -51,17 +60,90 @@ public class MyDr_add_visit_note {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		Button logOutButton = new Button("Log Out");
+		Button logOutButton = new Button("Kirjaudu ulos");
 		logOutButton.setBounds(630, 0, 104, 22);
 		frame.getContentPane().add(logOutButton);
 		
-		Button findPatientButton = new Button("Find Patient Record");
-		findPatientButton.setBounds(102, 231, 105, 80);
-		frame.getContentPane().add(findPatientButton);
+		JLabel visitNoteLabel = new JLabel("Potilaskertomus");
+		visitNoteLabel.setBounds(130, 62, 79, 27);
+		frame.getContentPane().add(visitNoteLabel);
 		
-		Button registerPatientButton = new Button("Register Patient");
-		registerPatientButton.setBounds(310, 231, 105, 80);
-		frame.getContentPane().add(registerPatientButton);
+		doctorNameField = new JTextField();
+		doctorNameField.setBounds(130, 125, 123, 20);
+		frame.getContentPane().add(doctorNameField);
+		doctorNameField.setColumns(10);
+		
+		locationField = new JTextField();
+		locationField.setBounds(291, 125, 123, 20);
+		frame.getContentPane().add(locationField);
+		locationField.setColumns(10);
+		
+		dateField = new JTextField();
+		dateField.setBounds(456, 125, 123, 20);
+		frame.getContentPane().add(dateField);
+		dateField.setColumns(10);
+		
+		diagnosisField = new JTextField();
+		diagnosisField.setBounds(130, 181, 123, 20);
+		frame.getContentPane().add(diagnosisField);
+		diagnosisField.setColumns(10);
+		
+		clicinalNoteField = new JTextField();
+		clicinalNoteField.setBounds(130, 255, 463, 175);
+		frame.getContentPane().add(clicinalNoteField);
+		clicinalNoteField.setColumns(10);
+		
+		JButton cancelButton = new JButton("Peruuta");
+		cancelButton.setBounds(504, 468, 89, 23);
+		frame.getContentPane().add(cancelButton);
+		
+		JButton saveButton = new JButton("Tallenna");
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					String query = "insert into doctor_visitation_note (doctor_name, location, date, primary_diagnosis, clinical_note) values (?, ?, ?, ?, ?)";
+					PreparedStatement pst = connection.prepareStatement(query);
+					
+					pst.setString(1,  doctorNameField.getText());
+					pst.setString(2,  locationField.getText());
+					pst.setString(3,  dateField.getText());
+					pst.setString(4,  diagnosisField.getText());
+					pst.setString(5,  clicinalNoteField.getText());
+					
+					
+					pst.execute();
+					
+					JOptionPane.showMessageDialog(null, "Data Saved");
+					
+					pst.close();
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
+		saveButton.setBounds(130, 468, 89, 23);
+		frame.getContentPane().add(saveButton);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(576, 255, 17, 175);
+		frame.getContentPane().add(scrollBar);
+		
+		lblNewLabel = new JLabel("L\u00E4\u00E4k\u00E4ri");
+		lblNewLabel.setBounds(130, 100, 46, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		lblSijainti = new JLabel("Sijainti");
+		lblSijainti.setBounds(291, 100, 46, 14);
+		frame.getContentPane().add(lblSijainti);
+		
+		lblPivmr = new JLabel("P\u00E4iv\u00E4m\u00E4\u00E4r\u00E4");
+		lblPivmr.setBounds(456, 100, 104, 14);
+		frame.getContentPane().add(lblPivmr);
+		
+		lblOletettuDiagnoosi = new JLabel("Oletettu diagnoosi");
+		lblOletettuDiagnoosi.setBounds(130, 156, 123, 14);
+		frame.getContentPane().add(lblOletettuDiagnoosi);
 		
 	}
 }
