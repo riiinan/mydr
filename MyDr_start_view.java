@@ -14,7 +14,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Panel;
 
-public class MyDr_start_view {
+public class MyDr_start_view extends JFrame{
 
 	private JFrame frame;
 
@@ -56,11 +56,11 @@ public class MyDr_start_view {
 		frame.getContentPane().add(logOutButton);
 		
 		Button findPatientButton = new Button("Find Patient Record");
-		findPatientButton.setBounds(102, 231, 105, 80);
+		findPatientButton.setBounds(168, 231, 105, 80);
 		frame.getContentPane().add(findPatientButton);
 		
 		Button registerPatientButton = new Button("Register Patient");
-		registerPatientButton.setBounds(310, 231, 105, 80);
+		registerPatientButton.setBounds(474, 231, 105, 80);
 		frame.getContentPane().add(registerPatientButton);
 		
 	}
